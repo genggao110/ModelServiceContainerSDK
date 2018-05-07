@@ -39,4 +39,6 @@ DataConfiguration.prototype.getDataID = function(state,event){
     return null;
 }
 
+//getData function wait to achieve
+
 module.exports = DataConfiguration;

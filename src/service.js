@@ -11,20 +11,20 @@ Service.prototype.getBaseURL = function(){
     return baseurl;
 }
 
-Service.prototype.connect = function(cb){
+Service.prototype.connect = function(){
     var self = this;
     var url = self.getBaseURL() + 'ping';
-    HttpRequest.request_get_json(url,null)
+    return HttpRequest.request_get_json(url,null)
           .then(function(body){
               console.log(body);
               if (body == 'OK'){
-                  cb(1);
+                  return Promise.resolve(1);
               }else{
-                  cb(0);
+                  return Promise.resolve(0);
               }
           })
           .catch(function(err){
-              console.log(err);
+              return Promise.reject(err);
           }); 
    
 }

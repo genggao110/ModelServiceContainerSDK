@@ -59,4 +59,16 @@ ModelServiceRecord.prototype.refresh = function(){
        })
 }
 
+ModelServiceRecord.createModelServiceRecordByJSON = function(jMsr,ip,port){
+     let restatus = jMsr.msr_status;
+     let pInput = Data.createDataConfigByJSON(jMsr.msr_input);
+     let pOutput = Data.createDataConfigByJSON(jMsr.msr_output);
+     let stdout = jMsr.msr_runninginfo.StdOut;
+     let stderr = jMsr.msr_runninginfo.StdErr;
+     let invokerr = jMsr.msr_runninginfo.InvokeErr;
+     let list_log = jMsr.msr_logs;
+
+     return new ModelServiceRecord(jMsr._id,jMsr.ms_id,jMsr.msr_datetime,jMsr.msr_span,pInput,pOutput,restatus,stdout,stderr,invokerr,list_log,ip,port);
+}
+
 module.exports = ModelServiceRecord;

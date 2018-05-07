@@ -1,29 +1,31 @@
 var Service = require('./service');
 var DataConfiguration = require('./dataConfiguration');
+var HttpRequest = require('./utils');
+var FsWritefile = require('fs-writefile-promise');
 
-
-function inheritPrototype(subType,superType){
-    var prototype = Object(superType.prototype);
-    prototype.constructor = subType;
-    subType.prototype = prototype;
-}
-var Data = function(id,type,size,value,ip,port){
+var Data = function(id,tag,size,genarationDateTime,type,value,ip,port){
      Service.call(this,ip,port);
      this.id = id;
-     this.type = type;
+     this.tag = tag;
      this.size = size;
+     this.genarationDateTime = genarationDateTime;
+     this.type = type;  
      this.value = value;
 }
 
-inheritPrototype(Data,Service);
+Service.inheritPrototype(Data,Service);
 
 Data.createDataByJSON = function(jData,ip,port){
-    var gd_id = jData.gd_id;
-    var gd_type = jData.gd_type;
-    var gd_size = jData.gd_size;
-    var gd_value = jData.gd_value;
+    let gd_id = jData.gd_id;
+    let gd_type = jData.gd_type;
+    let gd_size = jData.gd_size;
+    let gd_value = jData.gd_value;
+    let gd_tag = jData.gd_tag;
+    let gd_datetime = jData.gd_datetime;
 
-    return new Data(gd_id,gd_type,gd_size,gd_value,ip,port);
+    
+
+    return new Data(gd_id,gd_tag,gd_size,gd_datetime,gd_type,,gd_value,ip,port);
 }
 
 Data.createDataConfigByJSON = function(jConfig){
@@ -36,6 +38,40 @@ Data.createDataConfigByJSON = function(jConfig){
         pDataConfig.insertData(stateid,eventname,dataid,destroyed);
     }
     return pDataConfig;
+}
+
+Data.prototype.save = function(filepath){
+    var self = this;
+    var url = self.getBaseURL() + 'geodata/' + self.id;
+    return HttpRequest.request_get_json(url,null)
+       .then(function(data){
+           return FsWritefile(filepath,data);
+       })
+       .then(function(filename){
+           console.log(filename);
+           return Promise.resolve(1);
+       })
+       .catch(function(err){
+           console.error(err);
+           return Promise.reject(err);
+       })
+
+}
+
+Data.prototype.getID = function(){
+    return this.id;
+}
+
+Data.prototype.getType = function(){
+    return this.type;
+}
+
+Data.prototype.getSize = function(){
+    return this.type;
+}
+
+Data.prototype.getValue = function(){
+    return this.value;
 }
 
 module.exports = Data;
