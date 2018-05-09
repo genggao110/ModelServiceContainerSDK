@@ -35,9 +35,8 @@ Service.prototype.setIP = function(ip){
 }
 
 Service.inheritPrototype = function(subType,superType){
-    var prototype = Object(superType.prototype);
-    prototype.constructor = subType;
-    subType.prototype = prototype;
+    subType.prototype = Object.create(superType.prototype);
+    subType.prototype.constructor = subType;
 }
 
 

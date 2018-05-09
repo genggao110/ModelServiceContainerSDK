@@ -25,12 +25,12 @@ Data.createDataByJSON = function(jData,ip,port){
 
     
 
-    return new Data(gd_id,gd_tag,gd_size,gd_datetime,gd_type,,gd_value,ip,port);
+    return new Data(gd_id,gd_tag,gd_size,gd_datetime,gd_type,gd_value,ip,port);
 }
 
 Data.createDataConfigByJSON = function(jConfig){
     var pDataConfig = new DataConfiguration();
-    for(var i =0 ; i < jConfig.length; i++){
+    for(var i = 0 ; i < jConfig.length; i++){
         let stateid = jConfig[i].StateId;
         let eventname = jConfig[i].Event;
         let dataid = jConfig[i].DataId;
@@ -40,7 +40,7 @@ Data.createDataConfigByJSON = function(jConfig){
     return pDataConfig;
 }
 
-Data.prototype.save = function(filepath){
+Data.prototype.saveAs = function(filepath){
     var self = this;
     var url = self.getBaseURL() + 'geodata/' + self.id;
     return HttpRequest.request_get_json(url,null)
@@ -58,8 +58,40 @@ Data.prototype.save = function(filepath){
 
 }
 
+Data.prototype.isExist = function(){
+    var self = this;
+    var url = self.getBaseURL() + 'geodata/json/' + self.id;
+    return HttpRequest.request_get_json(url,null)
+       .then(data =>{
+           let jData = JSON.parse(data);
+           if(jData.result === 'suc'){
+               let gd = jData.data;
+               if(gd !== ''){
+                   return Promise.resolve(true);
+               }else{
+                return Promise.resolve(false);
+               }
+           }else{
+               return Promise.resolve(false);
+           }
+       })
+       .catch(err =>{
+        console.error(err);
+        return Promise.reject(err);
+       })
+}
+
+//basic get function(maybe no need)
 Data.prototype.getID = function(){
     return this.id;
+}
+
+Data.prototype.getTag = function(){
+    return this.tag;
+}
+
+Data.prototype.getGenerationDateTime = function(){
+    return this.genarationDateTime;
 }
 
 Data.prototype.getType = function(){

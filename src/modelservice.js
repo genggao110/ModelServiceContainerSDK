@@ -1,11 +1,6 @@
 var Service = require('./service');
 var HttpRequest = require('./utils');
 
-// function inheritPrototype(subType,superType){
-//     var prototype = Object(superType.prototype);
-//     prototype.constructor = subType;
-//     subType.prototype = prototype;
-// }
 var ModelService = function(id,name,type,url,pid,mid,registered,description,version,platform,deploytime,img,deployorname,deployoremail,status,limit,permission,ip,port){
     Service.call(this,ip,port);
     this.id = id;
@@ -18,6 +13,8 @@ var ModelService = function(id,name,type,url,pid,mid,registered,description,vers
     this.description = description;
     this.version = version;
     this.platform = platform;
+    this.deploytime = deploytime;
+    this.img = img;
     this.deployorname = deployorname;
     this.deployoremail = deployoremail;
     this.status = status;
@@ -31,7 +28,7 @@ ModelService.prototype.invoke = function(pDataConfig){
     var url = self.getBaseURL() + 'modelser/' + self.id + '?ac=run&inputdata=[';
     for(var i = 0; i < pDataConfig.getCount(); i++){
         var item = pDataConfig._item[i];
-        url = url + '{"stateId":"' + item.state + '","Event":"' + item.event + '","DataId":"' + item.data + '","Destoryed":"false"}' ;
+        url = url + '{"StateId":"' + item.state + '","Event":"' + item.event + '","DataId":"' + item.data + '","Destoryed":"false"}' ;
     }
     url += ']&auth=';
     console.log(url);
@@ -104,6 +101,7 @@ ModelService.prototype.refresh = function(){
        })
 }
 
+//basic get function(maybe no need)
 ModelService.prototype.getServiceOID = function(){
     return this.id;
 }
@@ -116,5 +114,44 @@ ModelService.prototype.getServiceType = function(){
     return this.type;
 }
 
+ModelService.prototype.getServiceDetailURL = function(){
+    return this.url;
+}
+
+ModelService.prototype.getServicePid = function(){
+    return this.pid;
+}
+
+ModelService.prototype.getServiceMid = function(){
+    return this.mid;
+}
+
+ModelService.prototype.getServiceRegister = function(){
+    return this.registered;
+}
+
+ModelService.prototype.getServiceDescription = function(){
+    return this.description;
+}
+
+ModelService.prototype.getServiceVersion = function(){
+    return this.version;
+}
+
+ModelService.prototype.getServicePlatform = function(){
+    return this.platform;
+}
+
+ModelService.prototype.getDeploymentTime = function(){
+    return this.deploytime;
+}
+
+ModelService.prototype.getServiceStatus = function(){
+    return this.status;
+}
+
+ModelService.prototype.getServiceLimitation = function(){
+    return this.limit;
+}
 
 module.exports = ModelService;
