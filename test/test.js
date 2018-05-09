@@ -1,5 +1,3 @@
-let mShow = require('../index');
-let HttpRequest = require('../src/utils');
 let Server = require('../src/server');
 
 

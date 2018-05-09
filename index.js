@@ -1,7 +1,3 @@
-var MessageShow = function() {};
-module.exports = MessageShow;
+const Server = require('./src/server');
 
-
-MessageShow.showmessage = function(){
-    console.log("this is my first module");
-}
+module.exports = Server;
