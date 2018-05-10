@@ -2,6 +2,9 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
 The Model Service Container Sdk using Javascript, the main function of it is that offering one method to get model service resource !
 
@@ -118,13 +121,13 @@ access.uploadDataByFile(filepath, tag)
 
   [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/parseurl.svg
+[npm-image]: https://img.shields.io/npm/v/modelservicesdk.svg
 [npm-url]: https://npmjs.org/package/modelservicesdk
-[node-version-image]: https://img.shields.io/node/v/parseurl.svg
+[node-version-image]: https://img.shields.io/node/v/modelservicesdk.svg
 [node-version-url]: http://nodejs.org/download/
-[travis-image]: https://img.shields.io/travis/pillarjs/parseurl/master.svg
-[travis-url]: https://travis-ci.org/pillarjs/parseurl
-[coveralls-image]: https://img.shields.io/coveralls/pillarjs/parseurl/master.svg
-[coveralls-url]: https://coveralls.io/r/pillarjs/parseurl?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/parseurl.svg
-[downloads-url]: https://npmjs.org/package/parseurl
+[travis-image]: https://img.shields.io/travis/pillarjs/modelservicesdk/master.svg
+[travis-url]: https://travis-ci.org/pillarjs/modelservicesdk
+[coveralls-image]: https://img.shields.io/coveralls/pillarjs/modelservicesdk/master.svg
+[coveralls-url]: https://coveralls.io/r/pillarjs/modelservicesdk?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/modelservicesdk.svg
+[downloads-url]: https://npmjs.org/package/modelservicesdk
