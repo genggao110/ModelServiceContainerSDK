@@ -28,7 +28,7 @@ ServiceAccess.prototype.getModelServicesList = function () {
                 var jMss = data.data;
                 var mslist = [];
                 for (var i = 0; i < jMss.length; i++) {
-                    var ms = new ModelService(jMss[i]._id, jMss[i].ms_model.m_name, jMss[i].ms_model.m_type, self.ip, self.port);
+                    var ms =  ModelService.createModelServiceByJSON(jMss[i],self.ip,self.port);
                     mslist.push(ms);
                 }
                 return Promise.resolve(mslist);
@@ -41,11 +41,6 @@ ServiceAccess.prototype.getModelServicesList = function () {
         })
 
 }
-
-// 模块统一promise化写法
-// fs = Promise.promisifyAll(fs);
-// fs.writeFileAsync()
-//     .then
 
 ServiceAccess.prototype.uploadDataByFile = function (filepath, tag) {
     var self = this;
@@ -71,7 +66,6 @@ ServiceAccess.prototype.uploadDataByFile = function (filepath, tag) {
         .then(function (result) {
             jGeoData = JSON.parse(result);
             if (jGeoData.result === 'suc') {
-                console.log(ip);
                 var pData = Data.createDataByJSON(jGeoData.data, ip, port);
                 return Promise.resolve(pData);
             } else {
@@ -81,31 +75,6 @@ ServiceAccess.prototype.uploadDataByFile = function (filepath, tag) {
         .catch((err) =>{
             return Promise.reject(err);
         })
-
-
-    // return new Promise((resolve, reject) => {
-    //     HttpRequest.request_postwithform_json(url, formData, 'File')
-    //         .then(function (body) {
-    //             var responsedata = JSON.parse(body);
-    //             if (responsedata.result === 'suc') {
-    //                 var gdid = responsedata.data;
-    //                 dataurl = self.getBaseURL() + 'geodata/json/' + gdid;
-    //                 return HttpRequest.request_get_json(dataurl, null);
-    //             } else {
-    //                 return reject(new Error('upload data failed'));
-    //             }
-    //         })
-    //         .then(function (result) {
-    //             jGeoData = JSOM.parse(result);
-    //             if (jGeoData.result === 'suc') {
-    //                 var pData = Data.createDataByJSON(jGeoData.data, self.ip, self.port);
-    //                 return resolve(pData);
-    //             } else {
-    //                 return reject(new Error('upload data failed'));
-    //             }
-    //         })
-    //         .catch(reject)
-    // })
 }
 
 ServiceAccess.prototype.getModelServiceByOID = function(msid){

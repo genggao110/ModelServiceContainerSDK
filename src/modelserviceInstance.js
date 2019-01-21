@@ -64,10 +64,10 @@ ModelServiceInstance.prototype.refresh = function(){
         })
 }
 
-ModelServiceInstance.wait4Status = function(status, timeout,log){
-    //TODO
-     console.log('to be finished');
-}
+// ModelServiceInstance.wait4Status = function(status, timeout,log){
+//     //TODO
+//     console.log('to be finished');
+// }
 
 ModelServiceInstance.createModelServiceInstacnce = function(jsData,ip,port){
      let state = jsData.state;

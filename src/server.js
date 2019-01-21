@@ -1,10 +1,6 @@
 var Service = require('./service');
 var ServiceAccess = require('./serviceAccess');
 
-// function inheritPrototype(subType, superType) {
-//     subType.prototype = Object.create(superType.prototype);
-//     subType.prototype.constructor = subType;  
-// }
 var Server = function(ip,port){
     Service.call(this,ip,port);
 }

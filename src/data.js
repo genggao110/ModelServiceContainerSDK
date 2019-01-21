@@ -48,7 +48,7 @@ Data.prototype.saveAs = function(filepath){
            return FsWritefile(filepath,data);
        })
        .then(function(filename){
-           console.log(filename);
+           //console.log(filename);
            return Promise.resolve(1);
        })
        .catch(function(err){

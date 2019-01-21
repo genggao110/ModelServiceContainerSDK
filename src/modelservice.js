@@ -35,7 +35,7 @@ ModelService.prototype.invoke = function (pDataConfig) {
         }
     }
     url += ']&auth=';
-    console.log(url);
+    // console.log(url);
     return HttpRequest.request_get_json(url, null)
         .then((body) => {
             var data = JSON.parse(body);
@@ -79,7 +79,12 @@ ModelService.createModelServiceByJSON = function (jMs, ip, port) {
     let deployoremail = jMs.ms_user.u_email;
     let status = jMs.ms_status;
     let limit = jMs.ms_limited;
-    let permission = jMs.ms_permission;
+    let permission = '';
+    if(jMs.ms_permission == 0){
+        permission = 'PMS_OPEN';
+    }else{
+        permission = 'PMS_PERMISSION';
+    }
     return new ModelService(oid, name, type, url, pid, mid, registered, des, version, platform, deployTime, img, deployorname, deployoremail, status, limit, permission, ip, port);
 }
 

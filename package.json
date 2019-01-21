@@ -1,6 +1,6 @@
 {
   "name": "modelservicesdk",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "description": "the sdk for model servce container in javascript",
   "main": "index.js",
   "scripts": {
