@@ -73,7 +73,7 @@ ModelService.createModelServiceByJSON = function (jMs, ip, port) {
         platform = 'PLF_UNKNOWN';
     }
 
-    let deployTime = jMs.ms_des;
+    let deployTime = jMs.ms_update;
     let img = jMs.ms_img;
     let deployorname = jMs.ms_user.u_name;
     let deployoremail = jMs.ms_user.u_email;
